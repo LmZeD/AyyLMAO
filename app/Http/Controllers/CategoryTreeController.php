@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\CategoryRepository;
+use App\Traits\FlattenArrayTrait;
+use Illuminate\Contracts\View\View;
 
 class CategoryTreeController extends Controller
 {
+    use FlattenArrayTrait;
     private $categoryRepository;
 
     public function __construct(CategoryRepository $categoryRepository)
@@ -13,14 +16,21 @@ class CategoryTreeController extends Controller
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function index()
+
+    /**
+     * Gathers data and displays it onto view.
+     *
+     * @return view
+     */
+    public function index() : view
     {
-        $recursiveResults = $this->categoryRepository->getChildrenRecursive();
+        $recursiveResults = $this->categoryRepository->getChildrenRecursive()->toArray();
         $parents = $this->categoryRepository->getTopLevelParents();
 
-        //dd($recursiveResults);
+        $flattenedRecursive = $this->flatten($recursiveResults);
 
-        return view('index', ['parents' => $parents, 'recursiveResults' => $recursiveResults]);
+        //dd();
+
+        return view('index', ['parents' => $parents, 'recursiveResults' => $flattenedRecursive]);
     }
-
 }

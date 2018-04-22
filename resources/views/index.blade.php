@@ -12,6 +12,13 @@
             @each('partials.recursive', $parents, 'category')
         </ul>
         <h2>Recursive</h2>
-
+        <ul>
+            @foreach($recursiveResults as $result)
+                @php($offset = substr_count($result, '.'))
+                <ul>
+                    {{str_repeat('-', $offset).$result}}
+                </ul>
+            @endforeach
+        </ul>
     </div>
 @endsection
