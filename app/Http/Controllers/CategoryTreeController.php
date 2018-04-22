@@ -24,8 +24,6 @@ class CategoryTreeController extends Controller
     {
         [$parents, $flattenedRecursive, $mergedIterative] = $this->prepareDataForPrintingService->getDataForIndex();
 
-        //dd($mergedIterative[0]['title']);
-
         return view('index',
             [
                 'parents' => $parents,

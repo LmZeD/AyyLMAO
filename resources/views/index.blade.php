@@ -18,8 +18,8 @@
         @endforeach
         <h2>Iterative result display</h2>
         @foreach($iterativeResults as $results)
-            @php($offset = substr_count($results['title'], '.'))
-            <li>{{str_repeat('-', $offset).$results['title']}}</li>
+            @php($offset = substr_count($results, '.'))
+            <li>{{str_repeat('-', $offset).$results}}</li>
         @endforeach
     </div>
 @endsection
