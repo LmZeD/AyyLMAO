@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\CategoryRepository;
-use App\Traits\FlattenArrayTrait;
+use App\Services\Category\PrepareDataForPrintingService;
 use Illuminate\Contracts\View\View;
 
 class CategoryTreeController extends Controller
 {
-    use FlattenArrayTrait;
-    private $categoryRepository;
+    private $prepareDataForPrintingService;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(PrepareDataForPrintingService $prepareDataForPrintingService)
     {
-        $this->categoryRepository = $categoryRepository;
+        $this->prepareDataForPrintingService = $prepareDataForPrintingService;
     }
 
 
@@ -22,15 +20,17 @@ class CategoryTreeController extends Controller
      *
      * @return view
      */
-    public function index() : view
+    public function index(): view
     {
-        $recursiveResults = $this->categoryRepository->getChildrenRecursive()->toArray();
-        $parents = $this->categoryRepository->getTopLevelParents();
+        [$parents, $flattenedRecursive, $mergedIterative] = $this->prepareDataForPrintingService->getDataForIndex();
 
-        $flattenedRecursive = $this->flatten($recursiveResults);
+        //dd($mergedIterative[0]['title']);
 
-        //dd();
-
-        return view('index', ['parents' => $parents, 'recursiveResults' => $flattenedRecursive]);
+        return view('index',
+            [
+                'parents' => $parents,
+                'recursiveResults' => $flattenedRecursive,
+                'iterativeResults' => $mergedIterative
+            ]);
     }
 }

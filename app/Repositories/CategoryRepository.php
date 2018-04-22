@@ -13,18 +13,21 @@ class CategoryRepository implements CategoryInterface
         $this->categoryModel = $categoryModel;
     }
 
-
-    public function getChildrenIterative()
-    {
-
-    }
-
-
+    /**
+     * Gets all elements from database in recursive manner.
+     *
+     * @return mixed
+     */
     public function getChildrenRecursive()
     {
         return $this->categoryModel->where('parent_id', null)->with('getChildrenRecursive')->get();
     }
 
+    /**
+     * Gets top level parents from database
+     *
+     * @return mixed
+     */
     public function getTopLevelParents()
     {
         return $this->categoryModel->where('parent_id', null)->get();
