@@ -50,7 +50,9 @@ class CategoryTreeController extends Controller
      */
     public function store(CreateCategoryRequest $request)
     {
-        $this->categoryRepository->store($request->toArray());
-        return redirect()->route('index')->with('success', 'Successfully created category!');
+        if ($this->categoryRepository->store($request->toArray())) {
+            return redirect()->route('index')->with('success', 'Successfully created category!');
+        }
+        return redirect()->route('index')->with('error', 'Please check data provided!');
     }
 }

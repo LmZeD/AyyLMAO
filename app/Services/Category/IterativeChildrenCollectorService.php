@@ -22,6 +22,7 @@ class IterativeChildrenCollectorService
     {
         //not using $this->getTopLevelParents, it would be concerns violation
         $topLevelParents = $this->categoryRepository->getTopLevelParents();
+
         $results[0] = $topLevelParents;
         $parents = $topLevelParents;
 

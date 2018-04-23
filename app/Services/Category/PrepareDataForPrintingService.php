@@ -20,21 +20,23 @@ class PrepareDataForPrintingService
     }
 
     /**
-     * Gets all data needed for index view in controller.
+     * Gets data needed for index view in controller.
      *
      * @return array
      */
-    public function getDataForIndex()
+    public function getDataForIndex(): array
     {
         $flattenedRecursive = $this->getRecursiveSolution();
         $parents = $this->categoryRepository->getTopLevelParents();
         $mergedIterative = $this->getIterativeSolution();
+        $allCategories = $this->categoryRepository->all();
 
-        return [$parents, $flattenedRecursive, $mergedIterative];
+        return [$parents, $flattenedRecursive, $mergedIterative, $allCategories];
     }
 
     /**
-     * Fetches iterative solution.
+     * Fetches iterative solution. Not private because needed for console command. Could be split to its own service
+     * on bigger project.
      *
      * @return array
      */
@@ -42,14 +44,15 @@ class PrepareDataForPrintingService
     {
         $iterativeResults = $this->iterativeChildrenCollectorService->getChildrenIterative();
         $mergedIterative = $this->mergeCollectionsArray($iterativeResults);
-        asort($mergedIterative);
         $mergedIterative = $this->unsetGetChildren($mergedIterative);
+        asort($mergedIterative);
         return $mergedIterative;
 
     }
 
     /**
-     * Fetches recursive solution.
+     * Fetches recursive solution. Not private because needed for console command. Could be split to its own service
+     * on bigger project.
      *
      * @return array
      */
@@ -57,6 +60,7 @@ class PrepareDataForPrintingService
     {
         $recursiveResults = $this->categoryRepository->getChildrenRecursive()->toArray();
         $flattenedRecursive = $this->flatten($recursiveResults);
+        $flattenedRecursive = $this->removeParentIds($flattenedRecursive);
 
         return $flattenedRecursive;
     }
@@ -74,6 +78,25 @@ class PrepareDataForPrintingService
         $i = 0;
         foreach ($array as $a) {
             $arrayToReturn[$i++] = $a['title'];
+        }
+        return $arrayToReturn;
+    }
+
+    /**
+     * Removes redundant data from array
+     *
+     * @param $array
+     *
+     * @return array
+     */
+    private function removeParentIds($array): array
+    {
+        $arrayToReturn = [];
+        $i = 0;
+        foreach ($array as $a) {
+            if ($i % 2 == 1)
+                $arrayToReturn[$i] = $a;
+            $i++;
         }
         return $arrayToReturn;
     }

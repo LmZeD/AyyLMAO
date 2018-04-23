@@ -14,6 +14,7 @@
 <ul><strong>For quick result output: php artisan display:categories</strong></ul>
 
 **Testing**
+<li>run: vendor\bin\phpunit </li>
 
 **Notes**
 <li>One of solutions could be Nested Set libraries, but I assume I should use vanilla code.</li>
@@ -22,6 +23,8 @@
 <li>Wrote basic unit tests to show, that code is easily testable (dependency injection pattern allows mocking ect..)</li>
     
 **Summary**
+<li>Recursive solution completed in Model using relations. Doing it in function is... pointless</li>
+<li>Iterative solution completed in service, algorithm idea: get top level, then level below, ect.</li>
 <li>Tried to show as many solutions as possible to show, that you can accomplish same goal in many ways.</li>
 <li>If I misunderstood something, please, let me know :)</li>
 <li>Front-end is vary basic (on site job description says that you're looking for back-end. I can make it pretty, but 

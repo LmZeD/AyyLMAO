@@ -42,7 +42,11 @@ class CategoryRepository implements CategoryInterface
      */
     public function store(array $args): bool
     {
-        $this->categoryModel->create($args);
+        try {
+            $this->categoryModel->create($args);
+        } catch (\Exception $ex) {
+            return false;
+        }
         return true;
     }
 
