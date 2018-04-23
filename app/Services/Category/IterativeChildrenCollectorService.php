@@ -31,7 +31,14 @@ class IterativeChildrenCollectorService
         return $results;
     }
 
-    private function iterate($results)
+    /**
+     * Iterates between levels of depth.
+     *
+     * @param $results
+     *
+     * @return array
+     */
+    private function iterate($results): array
     {
         $level = 1;
         while (true) {

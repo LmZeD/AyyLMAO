@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Category;
+use Illuminate\Support\Collection;
 
 class CategoryRepository implements CategoryInterface
 {
@@ -53,7 +54,7 @@ class CategoryRepository implements CategoryInterface
     /**
      * Gets all repositories
      *
-     * @return array
+     * @return mixed
      */
     public function all()
     {

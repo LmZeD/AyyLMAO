@@ -25,9 +25,10 @@
 **Summary**
 <li>Recursive solution completed in Model using relations. Doing it in function is... pointless</li>
 <li>Iterative solution completed in service, algorithm idea: get top level, then level below, ect.</li>
+<li>Services and repositories are bound to service container</li>
 <li>Tried to show as many solutions as possible to show, that you can accomplish same goal in many ways.</li>
 <li>If I misunderstood something, please, let me know :)</li>
-<li>Front-end is vary basic (on site job description says that you're looking for back-end. I can make it pretty, but 
+<li>Front-end is very basic (on site job description says that you're looking for back-end. I can make it pretty, but 
     I've shown that I understand templating and styes already, so maybe it's overkill? Anyway, let me know if I should
     upgrade front-end part).</li>
     
