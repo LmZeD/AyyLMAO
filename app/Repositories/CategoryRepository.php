@@ -32,4 +32,27 @@ class CategoryRepository implements CategoryInterface
     {
         return $this->categoryModel->where('parent_id', null)->get();
     }
+
+    /**
+     * Stores new category to database
+     *
+     * @param array $args
+     *
+     * @return bool
+     */
+    public function store(array $args): bool
+    {
+        $this->categoryModel->create($args);
+        return true;
+    }
+
+    /**
+     * Gets all repositories
+     *
+     * @return array
+     */
+    public function all()
+    {
+        return $this->categoryModel->all();
+    }
 }

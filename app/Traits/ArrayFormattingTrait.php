@@ -4,7 +4,8 @@ namespace App\Traits;
 
 use Illuminate\Support\Collection;
 
-trait ArrayFormattingTrait {
+trait ArrayFormattingTrait
+{
 
     /**
      * Flattens tree array
@@ -13,10 +14,12 @@ trait ArrayFormattingTrait {
      *
      * @return array
      */
-    function flatten($treeArray) : array
+    function flatten($treeArray): array
     {
         $flat = [];
-        array_walk_recursive($treeArray, function($a) use (&$flat) { $flat[] = $a; });
+        array_walk_recursive($treeArray, function ($a) use (&$flat) {
+            $flat[] = $a;
+        });
         return $flat;
     }
 
@@ -27,7 +30,7 @@ trait ArrayFormattingTrait {
      *
      * @return array
      */
-    function mergeCollectionsArray($collectionArray) : array
+    function mergeCollectionsArray($collectionArray): array
     {
         $merged = [];
         foreach ($collectionArray as $collection) {

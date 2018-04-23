@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Category extends Model
 {
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'parent_id'];
 
     //we don't need them for display
-    protected $hidden = ['id', 'parent_id', 'created_at', 'updated_at'];
+    protected $hidden = ['id', 'created_at', 'updated_at'];
 
     /**
      * Setting up relation to parent

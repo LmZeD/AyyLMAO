@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'CategoryTreeController@index')->name('index');
+Route::post('/storeCategory', 'CategoryTreeController@store')->name('store');
