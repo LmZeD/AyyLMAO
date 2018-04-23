@@ -2,7 +2,7 @@
 
 namespace App\Services\Category;
 
-use App\Repositories\CategoryRepository;
+use App\Repositories\CategoryInterface;
 use App\Traits\ArrayFormattingTrait;
 
 class PrepareDataForPrintingService
@@ -12,7 +12,7 @@ class PrepareDataForPrintingService
     private $iterativeChildrenCollectorService;
 
     public function __construct(
-        CategoryRepository $categoryRepository,
+        CategoryInterface $categoryRepository,
         IterativeChildrenCollectorService $iterativeChildrenCollectorService
     ) {
         $this->categoryRepository = $categoryRepository;

@@ -2,13 +2,13 @@
 
 namespace App\Services\Category;
 
-use App\Repositories\CategoryRepository;
+use App\Repositories\CategoryInterface;
 
 class IterativeChildrenCollectorService
 {
     private $categoryRepository;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryInterface $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
     }

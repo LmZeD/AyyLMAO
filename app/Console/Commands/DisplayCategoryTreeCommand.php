@@ -42,6 +42,11 @@ class DisplayCategoryTreeCommand extends Command
      */
     public function handle()
     {
+        $this->runCommand();
+    }
+
+    private function runCommand()
+    {
         $this->output->writeln('Starting...');
 
         $recursiveSolution = $this->prepareDataForPrintingService->getRecursiveSolution();

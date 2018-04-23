@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCategoryRequest;
-use App\Repositories\CategoryRepository;
+use App\Repositories\CategoryInterface;
 use App\Services\Category\PrepareDataForPrintingService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Redirect;
@@ -15,7 +15,7 @@ class CategoryTreeController extends Controller
 
     public function __construct(
         PrepareDataForPrintingService $prepareDataForPrintingService,
-        CategoryRepository $categoryRepository
+        CategoryInterface $categoryRepository
     ) {
         $this->prepareDataForPrintingService = $prepareDataForPrintingService;
         $this->categoryRepository = $categoryRepository;
