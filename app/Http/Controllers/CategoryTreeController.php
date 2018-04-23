@@ -6,7 +6,8 @@ use App\Http\Requests\CreateCategoryRequest;
 use App\Repositories\CategoryInterface;
 use App\Services\Category\PrepareDataForPrintingService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 
 class CategoryTreeController extends Controller
 {
@@ -46,9 +47,9 @@ class CategoryTreeController extends Controller
      *
      * @param CreateCategoryRequest $request
      *
-     * @return redirect
+     * @return RedirectResponse
      */
-    public function store(CreateCategoryRequest $request): redirect
+    public function store(CreateCategoryRequest $request): RedirectResponse
     {
         if ($this->categoryRepository->store($request->toArray())) {
             return redirect()->route('index')->with('success', 'Successfully created category!');
